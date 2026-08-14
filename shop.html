@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — lookbooklookbook</title>
+<meta name="description" content="เลือกซื้อเสื้อผ้ามินิมอลจาก lookbooklookbook — เดรส เสื้อ นิตแวร์ เอาต์เตอร์ และแอคเซสเซอรี่">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div data-layout-header></div>
+
+<div class="container">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a><span>/</span><span data-crumb>Shop</span>
+  </div>
+
+  <div class="shop-head">
+    <div>
+      <h1 data-cat-title>Shop All</h1>
+      <div class="count" data-count>0 items</div>
+    </div>
+  </div>
+
+  <div class="shop-layout">
+    <aside class="filter-sidebar">
+      <div class="filter-group">
+        <h4>Category</h4>
+        <label><input type="checkbox" data-filter="cat" value="dresses"> Dresses</label>
+        <label><input type="checkbox" data-filter="cat" value="tops"> Tops &amp; Blouses</label>
+        <label><input type="checkbox" data-filter="cat" value="knitwear"> Knitwear</label>
+        <label><input type="checkbox" data-filter="cat" value="outerwear"> Outerwear</label>
+        <label><input type="checkbox" data-filter="cat" value="bottoms"> Trousers &amp; Skirts</label>
+        <label><input type="checkbox" data-filter="cat" value="accessories"> Accessories</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Size</h4>
+        <label><input type="checkbox" data-filter="size" value="XS"> XS</label>
+        <label><input type="checkbox" data-filter="size" value="S"> S</label>
+        <label><input type="checkbox" data-filter="size" value="M"> M</label>
+        <label><input type="checkbox" data-filter="size" value="L"> L</label>
+        <label><input type="checkbox" data-filter="size" value="XL"> XL</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Colour</h4>
+        <label><input type="checkbox" data-filter="color" value="White"> White</label>
+        <label><input type="checkbox" data-filter="color" value="Blush"> Blush</label>
+        <label><input type="checkbox" data-filter="color" value="Cream"> Cream</label>
+        <label><input type="checkbox" data-filter="color" value="Sand"> Sand</label>
+        <label><input type="checkbox" data-filter="color" value="Black"> Black</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Price</h4>
+        <label><input type="checkbox" data-filter="price" value="0-1000"> ต่ำกว่า ฿1,000</label>
+        <label><input type="checkbox" data-filter="price" value="1000-2000"> ฿1,000 – ฿2,000</label>
+        <label><input type="checkbox" data-filter="price" value="2000-99999"> มากกว่า ฿2,000</label>
+      </div>
+
+      <button class="btn btn-block" data-clear-filters style="font-size:11px;padding:11px 0;">Clear All</button>
+    </aside>
+
+    <div>
+      <div class="sort-row">
+        <label>Sort by&nbsp;
+          <select data-sort>
+            <option value="featured">Featured</option>
+            <option value="new">Newest</option>
+            <option value="low">Price: Low to High</option>
+            <option value="high">Price: High to Low</option>
+          </select>
+        </label>
+      </div>
+      <div class="grid" data-shop-grid></div>
+      <p data-no-results style="display:none;text-align:center;color:#8c8c8c;padding:70px 0;">
+        ไม่พบสินค้าที่ตรงกับตัวกรอง — ลองปรับตัวเลือกใหม่อีกครั้ง
+      </p>
+    </div>
+  </div>
+</div>
+
+<div style="height:70px;"></div>
+<div data-layout-footer></div>
+
+<script src="js/products.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/main.js"></script>
+<script>
+(function () {
+  const params = new URLSearchParams(location.search);
+  const cat = params.get('cat');
+
+  if (cat && CAT_LABELS[cat]) {
+    document.querySelector('[data-cat-title]').textContent = CAT_LABELS[cat];
+    document.querySelector('[data-crumb]').textContent = CAT_LABELS[cat];
+    document.title = CAT_LABELS[cat] + ' — lookbooklookbook';
+  }
+
+  const grid = document.querySelector('[data-shop-grid]');
+  const countEl = document.querySelector('[data-count]');
+  const noResults = document.querySelector('[data-no-results]');
+
+  function checkedValues(kind) {
+    return [...document.querySelectorAll(`[data-filter="${kind}"]:checked`)].map(i => i.value);
+  }
+
+  function render() {
+    let list = cat ? PRODUCTS.filter(p => p.cat.includes(cat)) : PRODUCTS.slice();
+
+    const cats = checkedValues('cat');
+    if (cats.length) list = list.filter(p => cats.some(c => p.cat.includes(c)));
+
+    const sizes = checkedValues('size');
+    if (sizes.length) list = list.filter(p => sizes.some(s => p.sizes.includes(s) && !p.soldOut.includes(s)));
+
+    const colors = checkedValues('color');
+    if (colors.length) list = list.filter(p => p.colors.some(c => colors.includes(c.name)));
+
+    const prices = checkedValues('price');
+    if (prices.length) {
+      list = list.filter(p => prices.some(r => {
+        const [min, max] = r.split('-').map(Number);
+        return p.price >= min && p.price <= max;
+      }));
+    }
+
+    const sort = document.querySelector('[data-sort]').value;
+    if (sort === 'low') list.sort((a, b) => a.price - b.price);
+    if (sort === 'high') list.sort((a, b) => b.price - a.price);
+    if (sort === 'new') list.sort((a, b) => b.id - a.id);
+
+    grid.innerHTML = list.map(productCardHTML).join('');
+    countEl.textContent = `${list.length} item${list.length === 1 ? '' : 's'}`;
+    noResults.style.display = list.length ? 'none' : 'block';
+  }
+
+  document.querySelectorAll('[data-filter]').forEach(el => el.addEventListener('change', render));
+  document.querySelector('[data-sort]').addEventListener('change', render);
+  document.querySelector('[data-clear-filters]').addEventListener('click', () => {
+    document.querySelectorAll('[data-filter]').forEach(el => { el.checked = false; });
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
