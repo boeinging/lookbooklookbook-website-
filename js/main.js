@@ -10,9 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSizeButtons();
   initQtyControls();
   initAddToBag();
-  initCardHoverImages();
   updateBagBadge();
-  initRemoveFromBag();
   initNewsletter();
 });
 
@@ -177,11 +175,6 @@ function showToast(msg) {
   toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
 }
 
-/* ---------- Product card hover swap (shop grid) ---------- */
-function initCardHoverImages() {
-  // handled purely via CSS opacity transitions; no JS needed currently
-}
-
 /* ---------- Cart page rendering ---------- */
 function renderBagPage() {
   const wrap = document.querySelector('[data-bag-items]');
@@ -212,15 +205,12 @@ function renderBagPage() {
   `).join('');
 
   const subtotal = bag.reduce((s, i) => s + i.price * i.qty, 0);
-  const shipping = subtotal > 1500 || subtotal === 0 ? 0 : 90;
+  const shipping = subtotal > 1500 ? 0 : 90;
   const total = subtotal + shipping;
 
-  const subtotalEl = document.querySelector('[data-subtotal]');
-  const shippingEl = document.querySelector('[data-shipping]');
-  const totalEl = document.querySelector('[data-total]');
-  if (subtotalEl) subtotalEl.textContent = `฿${subtotal.toLocaleString()}`;
-  if (shippingEl) shippingEl.textContent = shipping === 0 ? 'Free' : `฿${shipping}`;
-  if (totalEl) totalEl.textContent = `฿${total.toLocaleString()}`;
+  document.querySelector('[data-subtotal]').textContent = `฿${subtotal.toLocaleString()}`;
+  document.querySelector('[data-shipping]').textContent = shipping === 0 ? 'Free' : `฿${shipping}`;
+  document.querySelector('[data-total]').textContent = `฿${total.toLocaleString()}`;
 
   initRemoveFromBag();
 }
