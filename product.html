@@ -111,17 +111,21 @@
     : baht(p.price);
 
   const mainImg = document.querySelector('[data-main-img]');
+  mainImg.dataset.fallback = p.fallback[0];
   mainImg.src = p.img[0];
   mainImg.alt = p.name;
 
   document.querySelector('[data-thumbs]').innerHTML = p.img
-    .map((src, i) => `<img src="${src}" alt="${p.name} view ${i + 1}" class="${i === 0 ? 'active' : ''}">`)
+    .map((src, i) => `<img src="${src}" data-fallback="${p.fallback[i]}" alt="${p.name} view ${i + 1}" class="${i === 0 ? 'active' : ''}">`)
     .join('');
 
-  document.querySelectorAll('[data-thumbs] img').forEach(thumb => {
+  document.querySelectorAll('[data-thumbs] img').forEach((thumb, i) => {
     thumb.addEventListener('click', () => {
       document.querySelectorAll('[data-thumbs] img').forEach(t => t.classList.remove('active'));
       thumb.classList.add('active');
+      // ใช้รูปที่ thumbnail แสดงอยู่จริง เผื่อกรณีที่มัน fall back ไปแล้ว
+      delete mainImg.dataset.fellBack;
+      mainImg.dataset.fallback = p.fallback[i];
       mainImg.src = thumb.src;
     });
   });
