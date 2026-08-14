@@ -11,53 +11,30 @@ const HEADER_HTML = `
         <svg class="icon" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
       <ul class="nav-main">
+        <li><a href="shop.html?cat=new" class="nav-link">New In</a></li>
         <li>
-          <a href="shop.html?cat=woman" class="nav-link">Woman</a>
+          <a href="shop.html?cat=gowns" class="nav-link">Gowns</a>
           <div class="mega">
             <div class="mega-col">
-              <h4>Clothing</h4>
+              <h4>By Fabric</h4>
               <ul>
-                <li><a href="shop.html?cat=dresses">Dresses</a></li>
-                <li><a href="shop.html?cat=tops">Tops &amp; Blouses</a></li>
-                <li><a href="shop.html?cat=knitwear">Knitwear</a></li>
-                <li><a href="shop.html?cat=outerwear">Outerwear</a></li>
-                <li><a href="shop.html?cat=bottoms">Trousers &amp; Skirts</a></li>
+                <li><a href="shop.html?cat=floral">Floral Print</a></li>
+                <li><a href="shop.html?cat=lace">Lace</a></li>
+                <li><a href="shop.html?cat=satin">Satin</a></li>
+                <li><a href="shop.html?cat=jacquard">Jacquard</a></li>
               </ul>
             </div>
             <div class="mega-col">
               <h4>Featured</h4>
               <ul>
+                <li><a href="shop.html?cat=gowns">All Gowns</a></li>
                 <li><a href="shop.html?cat=new">New In</a></li>
                 <li><a href="shop.html?cat=bestsellers">Bestsellers</a></li>
-                <li><a href="shop.html?cat=accessories">Accessories</a></li>
-                <li><a href="shop.html?cat=sale">Sale</a></li>
               </ul>
             </div>
           </div>
         </li>
-        <li>
-          <a href="shop.html?cat=man" class="nav-link">Man</a>
-          <div class="mega">
-            <div class="mega-col">
-              <h4>Clothing</h4>
-              <ul>
-                <li><a href="shop.html?cat=shirts">Shirts</a></li>
-                <li><a href="shop.html?cat=tshirts">T-Shirts</a></li>
-                <li><a href="shop.html?cat=knitwear-m">Knitwear</a></li>
-                <li><a href="shop.html?cat=trousers">Trousers</a></li>
-              </ul>
-            </div>
-            <div class="mega-col">
-              <h4>Featured</h4>
-              <ul>
-                <li><a href="shop.html?cat=new-man">New In</a></li>
-                <li><a href="shop.html?cat=sale-man">Sale</a></li>
-              </ul>
-            </div>
-          </div>
-        </li>
-        <li><a href="shop.html?cat=new" class="nav-link">New In</a></li>
-        <li><a href="shop.html?cat=sale" class="nav-link" style="color:#b46a7d;">Sale</a></li>
+        <li><a href="shop.html?cat=gowns" class="nav-link">Late Checkout</a></li>
         <li><a href="about.html" class="nav-link">About</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
@@ -83,22 +60,18 @@ const HEADER_HTML = `
 <div class="drawer-overlay" data-drawer-close></div>
 <nav class="drawer">
   <button class="drawer-close" data-drawer-close aria-label="Close menu">&times;</button>
-  <h3>Woman</h3>
+  <h3>Gowns</h3>
   <div class="drawer-sub">
-    <a href="shop.html?cat=dresses">Dresses</a>
-    <a href="shop.html?cat=tops">Tops &amp; Blouses</a>
-    <a href="shop.html?cat=knitwear">Knitwear</a>
-    <a href="shop.html?cat=outerwear">Outerwear</a>
-  </div>
-  <h3>Man</h3>
-  <div class="drawer-sub">
-    <a href="shop.html?cat=shirts">Shirts</a>
-    <a href="shop.html?cat=tshirts">T-Shirts</a>
-    <a href="shop.html?cat=trousers">Trousers</a>
+    <a href="shop.html?cat=gowns">All Gowns</a>
+    <a href="shop.html?cat=floral">Floral Print</a>
+    <a href="shop.html?cat=lace">Lace</a>
+    <a href="shop.html?cat=satin">Satin</a>
+    <a href="shop.html?cat=jacquard">Jacquard</a>
   </div>
   <h3>&nbsp;</h3>
   <a href="shop.html?cat=new">New In</a>
-  <a href="shop.html?cat=sale">Sale</a>
+  <a href="shop.html?cat=bestsellers">Bestsellers</a>
+  <a href="shop.html?cat=gowns">Late Checkout</a>
   <a href="about.html">About</a>
   <a href="contact.html">Contact</a>
 </nav>
@@ -109,10 +82,10 @@ const HEADER_HTML = `
     <input type="text" placeholder="ค้นหาสินค้า, คอลเลกชัน...">
     <div class="search-suggest">
       คำค้นยอดนิยม:
-      <a href="shop.html?cat=dresses">Dresses</a>
-      <a href="shop.html?cat=knitwear">Knitwear</a>
+      <a href="shop.html?cat=gowns">Gowns</a>
+      <a href="shop.html?cat=lace">Lace</a>
       <a href="shop.html?cat=new">New In</a>
-      <a href="shop.html?cat=sale">Sale</a>
+      <a href="shop.html?cat=bestsellers">Bestsellers</a>
     </div>
   </div>
 </div>
@@ -145,10 +118,10 @@ const FOOTER_HTML = `
       <div>
         <h5>Shop</h5>
         <ul>
-          <li><a href="shop.html?cat=woman">Woman</a></li>
-          <li><a href="shop.html?cat=man">Man</a></li>
-          <li><a href="shop.html?cat=accessories">Accessories</a></li>
-          <li><a href="shop.html?cat=sale">Sale</a></li>
+          <li><a href="shop.html?cat=new">New In</a></li>
+          <li><a href="shop.html?cat=gowns">All Gowns</a></li>
+          <li><a href="shop.html?cat=bestsellers">Bestsellers</a></li>
+          <li><a href="shop.html?cat=gowns">Late Checkout</a></li>
         </ul>
       </div>
       <div>

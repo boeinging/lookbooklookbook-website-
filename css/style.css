@@ -218,16 +218,16 @@ input { font-family: inherit; }
 
 .hero-media {
   position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 30% 20%, rgba(246,221,227,0.9), transparent 70%),
-    radial-gradient(ellipse 50% 60% at 78% 65%, rgba(232,183,196,0.55), transparent 72%),
-    linear-gradient(160deg, #fdf7f8 0%, #f6dde3 55%, #fbeef1 100%);
+  background-color: var(--blush-soft);
+  background-image: url('../images/editorial-1.jpg');
+  background-size: cover;
+  background-position: center 12%;
 }
 
 .hero-media::after {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(0deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 55%);
+  background: linear-gradient(0deg, rgba(255,255,255,0.97) 8%, rgba(255,255,255,0.72) 32%, rgba(255,255,255,0) 68%);
 }
 
 .hero-content {
@@ -242,7 +242,8 @@ input { font-family: inherit; }
   font-size: 12px;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--blush-text);
+  /* เข้มกว่าสีชมพูปกติ เพราะต้องอ่านออกบนรูปที่มีรายละเอียดเยอะ */
+  color: #8c4d5e;
   margin-bottom: 14px;
 }
 
@@ -306,7 +307,7 @@ input { font-family: inherit; }
 
 .tile {
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 2/3;
   overflow: hidden;
   background: var(--blush-soft);
 }
@@ -339,7 +340,7 @@ input { font-family: inherit; }
 
 .card-img {
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 2/3;
   background: var(--blush-soft);
   overflow: hidden;
   margin-bottom: 14px;
@@ -551,7 +552,7 @@ input { font-family: inherit; }
 
 .pdp-thumbs { display: flex; flex-direction: column; gap: 10px; }
 .pdp-thumbs img {
-  aspect-ratio: 3/4;
+  aspect-ratio: 2/3;
   object-fit: cover;
   cursor: pointer;
   opacity: 0.55;
@@ -559,7 +560,7 @@ input { font-family: inherit; }
 }
 .pdp-thumbs img.active { opacity: 1; border-color: var(--ink); }
 
-.pdp-main-img { background: var(--blush-soft); aspect-ratio: 3/4; overflow: hidden; }
+.pdp-main-img { background: var(--blush-soft); aspect-ratio: 2/3; overflow: hidden; }
 .pdp-main-img img { width: 100%; height: 100%; object-fit: cover; }
 
 .pdp-info { padding-top: 10px; }
@@ -650,7 +651,7 @@ input { font-family: inherit; }
   padding: 24px 0;
   border-bottom: 1px solid var(--line);
 }
-.bag-item img { aspect-ratio: 3/4; object-fit: cover; background: var(--blush-soft); }
+.bag-item img { aspect-ratio: 2/3; object-fit: cover; background: var(--blush-soft); }
 .bag-item-name { font-size: 14.5px; margin-bottom: 6px; }
 .bag-item-meta { font-size: 12.5px; color: var(--gray); margin-bottom: 4px; }
 .bag-item-price { font-size: 14px; margin-top: 10px; }
@@ -697,7 +698,7 @@ input { font-family: inherit; }
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
-.lookbook-grid img { aspect-ratio: 3/4; object-fit: cover; }
+.lookbook-grid img { aspect-ratio: 2/3; object-fit: cover; }
 .lookbook-grid .tall { grid-row: span 2; aspect-ratio: auto; height: 100%; }
 
 .prose { max-width: 720px; margin: 0 auto; text-align: center; color: var(--ink-soft); line-height: 1.9; font-size: 15px; }

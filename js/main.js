@@ -2,16 +2,6 @@
 // lookbooklookbook — shared front-end interactions (mockup)
 // ============================================
 
-// รูปสินค้าที่ยังไม่มีไฟล์จริงใน images/ จะสลับไปใช้ placeholder แทนรูปแตก
-// ต้องใช้ capture phase เพราะ error ของ <img> ไม่ bubble
-document.addEventListener('error', e => {
-  const el = e.target;
-  if (el.tagName === 'IMG' && el.dataset.fallback && !el.dataset.fellBack) {
-    el.dataset.fellBack = '1';
-    el.src = el.dataset.fallback;
-  }
-}, true);
-
 document.addEventListener('DOMContentLoaded', () => {
   initDrawer();
   initSearch();

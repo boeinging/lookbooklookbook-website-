@@ -1,35 +1,38 @@
 # รูปสินค้า
 
-วางไฟล์รูปในโฟลเดอร์นี้ตามชื่อด้านล่าง เว็บจะหยิบไปใช้เองทันทีโดยไม่ต้องแก้โค้ด
-ถ้ายังไม่มีไฟล์ไหน ตำแหน่งนั้นจะแสดง placeholder สีพื้นแทน ไม่ขึ้นรูปแตก
+รูปในโฟลเดอร์นี้มาจากคอลเลกชัน **Late Checkout** ย่อจากไฟล์ต้นฉบับ 5350×8021 px
+เหลือ 1200×1800 px (สัดส่วน 2:3 เดิม ไม่ crop) JPEG quality 70 — รวม 13MB / 38 ไฟล์
 
-## ชื่อไฟล์ที่ต้องใช้
+## การตั้งชื่อ
 
-รูปแรกของแต่ละตัว (ลงท้าย `-1`) คือรูปที่โชว์ในกริดหน้าแรกและหน้า Shop
-รูปที่สอง (`-2`) คือรูปที่ขึ้นมาแทนตอนเอาเมาส์ไปชี้ ควรเป็นมุมอื่นหรือทั้งตัว
+`<style>-<color>-N.jpg` — แต่ละสีมีแกลเลอรีของตัวเอง เวลากดเปลี่ยนสีในหน้าสินค้ารูปจะเปลี่ยนทั้งชุด
 
-| สินค้า | ไฟล์ |
-| --- | --- |
-| Satin Slip Midi Dress | `satin-slip-dress-1.jpg` … `-4.jpg` |
-| Oversized Wool-Blend Coat | `wool-coat-1.jpg` … `-3.jpg` |
-| Ribbed Knit Top | `ribbed-knit-top-1.jpg` … `-3.jpg` |
-| Tailored Wide-Leg Trousers | `wide-leg-trousers-1.jpg` … `-3.jpg` |
-| Relaxed Linen Shirt | `linen-shirt-1.jpg` … `-3.jpg` |
-| Pleated Midi Skirt | `pleated-skirt-1.jpg` … `-3.jpg` |
-| Cropped Tailored Blazer | `cropped-blazer-1.jpg` … `-3.jpg` |
-| Essential Cotton Tee | `cotton-tee-1.jpg` … `-3.jpg` |
-| Poplin Oversized Shirt | `poplin-shirt-1.jpg` `-2.jpg` |
-| Merino Crewneck Sweater | `merino-sweater-1.jpg` `-2.jpg` |
-| Leather Shoulder Bag | `leather-bag-1.jpg` `-2.jpg` |
-| Slim Tapered Chinos | `chinos-1.jpg` `-2.jpg` |
+| ชุด | สี | ไฟล์ |
+| --- | --- | --- |
+| Adeline | Pink Blossom | `adeline-pink-1..4.jpg` |
+| Anne | Lilac | `anne-lilac-1..4.jpg` |
+| Aubrey | Champagne | `aubrey-metallic-1..4.jpg` |
+| Aubrey | Pearl | `aubrey-pearl-1..4.jpg` |
+| Bree | Pink Blossom | `bree-pink-1..4.jpg` |
+| Bree | Sage | `bree-green-1..4.jpg` |
+| Isabelle | Pink Blossom | `isabelle-pink-1..4.jpg` |
+| Kimberly | Pink Blossom | `kimberly-pink-1..4.jpg` |
+| Paula | Sage | `paula-green-1..4.jpg` |
+| — | campaign | `editorial-1.jpg` (hero หน้าแรก), `editorial-2.jpg` (บล็อก editorial) |
 
-## ข้อกำหนดรูป
+รูป `-1` คือรูปที่โชว์ในกริด ส่วน `-2` คือรูปที่ขึ้นมาแทนตอนเอาเมาส์ไปชี้
 
-- **สัดส่วน 3:4 แนวตั้ง** — เว็บ crop ให้พอดีอยู่แล้ว แต่ถ้าส่งมาเป็น 3:4 อยู่แล้วจะคุมองค์ประกอบภาพได้ตรงใจกว่า
-- **ขนาดแนะนำ 1200×1600 px** ใหญ่พอสำหรับจอ Retina
-- **ไฟล์ไม่ควรเกิน 300KB ต่อรูป** — บีบด้วย https://squoosh.app ได้ ถ้าใช้ `.webp` จะเล็กกว่า `.jpg` ราวครึ่งหนึ่ง (ถ้าเปลี่ยนเป็น webp ต้องแก้นามสกุลใน `js/products.js` ด้วย)
-- พื้นหลังโทนสว่างจะเข้ากับธีมขาว-ชมพูของเว็บที่สุด
+## เพิ่มหรือเปลี่ยนรูป
 
-## ถ้าอยากเปลี่ยนชื่อสินค้า ราคา หรือจำนวนรูป
+ไฟล์ต้นฉบับใหญ่มาก (40MB+ ต่อไฟล์) ต้องย่อก่อนใส่ repo คำสั่งที่ใช้:
 
-แก้ที่ [`js/products.js`](../js/products.js) — ตรง `slug` คือชื่อไฟล์ ส่วนตัวเลขใน `photos(slug, จำนวนรูป, ...)` คือจำนวนรูปของสินค้าตัวนั้น
+```bash
+sips -s format jpeg -s formatOptions 70 -Z 1800 ต้นฉบับ.jpg --out images/ชื่อใหม่.jpg
+```
+
+ถ้าเพิ่มจำนวนรูปต่อสี ต้องแก้เลขใน `photos('slug', จำนวน)` ที่ [`js/products.js`](../js/products.js) ด้วย
+
+## ต้นฉบับ
+
+`/Users/boeing/Downloads/late checkout 2` — 76 ไฟล์ 2GB (ไม่ได้ commit เข้า repo)
+แต่ละชุดมีรูปมากกว่า 4 รูป ถ้าอยากเพิ่มในแกลเลอรีก็ดึงเพิ่มได้

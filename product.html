@@ -111,39 +111,45 @@
     : baht(p.price);
 
   const mainImg = document.querySelector('[data-main-img]');
-  mainImg.dataset.fallback = p.fallback[0];
-  mainImg.src = p.img[0];
-  mainImg.alt = p.name;
+  const thumbWrap = document.querySelector('[data-thumbs]');
+  const btn = document.querySelector('[data-add-to-bag]');
 
-  document.querySelector('[data-thumbs]').innerHTML = p.img
-    .map((src, i) => `<img src="${src}" data-fallback="${p.fallback[i]}" alt="${p.name} view ${i + 1}" class="${i === 0 ? 'active' : ''}">`)
-    .join('');
+  // วาดแกลเลอรีของสีที่เลือก — เปลี่ยนสีแล้วรูปเปลี่ยนทั้งชุด
+  function showColor(color) {
+    mainImg.src = color.photos[0];
+    mainImg.alt = `${p.name} — ${color.name}`;
+    btn.dataset.image = color.photos[0];
 
-  document.querySelectorAll('[data-thumbs] img').forEach((thumb, i) => {
-    thumb.addEventListener('click', () => {
-      document.querySelectorAll('[data-thumbs] img').forEach(t => t.classList.remove('active'));
-      thumb.classList.add('active');
-      // ใช้รูปที่ thumbnail แสดงอยู่จริง เผื่อกรณีที่มัน fall back ไปแล้ว
-      delete mainImg.dataset.fellBack;
-      mainImg.dataset.fallback = p.fallback[i];
-      mainImg.src = thumb.src;
+    thumbWrap.innerHTML = color.photos
+      .map((src, i) => `<img src="${src}" alt="${p.name} — ${color.name} view ${i + 1}" class="${i === 0 ? 'active' : ''}">`)
+      .join('');
+
+    thumbWrap.querySelectorAll('img').forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        thumbWrap.querySelectorAll('img').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+        mainImg.src = thumb.src;
+      });
     });
-  });
+  }
 
   document.querySelector('[data-colors]').innerHTML = p.colors
     .map((c, i) => `<span class="color-swatch${i === 0 ? ' selected' : ''}" data-color="${c.name}" style="background:${c.hex}" title="${c.name}"></span>`)
     .join('');
   document.querySelector('[data-color-label]').textContent = p.colors[0].name;
+  showColor(p.colors[0]);
+
+  document.querySelectorAll('[data-colors] .color-swatch').forEach((sw, i) => {
+    sw.addEventListener('click', () => showColor(p.colors[i]));
+  });
 
   document.querySelector('[data-sizes]').innerHTML = p.sizes
     .map(s => `<div class="size-btn${p.soldOut.includes(s) ? ' disabled' : ''}">${s}</div>`)
     .join('');
 
-  const btn = document.querySelector('[data-add-to-bag]');
   btn.dataset.id = p.id;
   btn.dataset.name = p.name;
   btn.dataset.price = p.price;
-  btn.dataset.image = p.img[0];
 
   document.querySelector('[data-related]').innerHTML = PRODUCTS
     .filter(x => x.id !== p.id)
